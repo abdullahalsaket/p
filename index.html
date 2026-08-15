@@ -229,17 +229,29 @@
             padding: 6px;
             background: linear-gradient(160deg, var(--accent-gold), #f8e5a0);
             box-shadow: 0 0 60px rgba(212, 175, 55, 0.3);
-            transition: transform 0.5s ease;
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
-        .profile-img-wrapper:hover { transform: scale(1.02); }
-
+        /* تأثير دخول الصورة (Fade-In) */
         .profile-img-wrapper img {
             width: 100%;
             height: 100%;
             border-radius: 50%;
             object-fit: cover;
             border: 4px solid var(--primary-bg);
+            animation: fadeInScale 1.5s ease-out forwards;
+            opacity: 0;
+        }
+
+        /* تأثيرات الصورة عند الوقوف عليها */
+        .profile-img-wrapper:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 80px rgba(212, 175, 55, 0.6);
+        }
+
+        @keyframes fadeInScale {
+            0% { opacity: 0; transform: scale(0.95); }
+            100% { opacity: 1; transform: scale(1); }
         }
 
         .hero-text {
@@ -440,7 +452,8 @@
         <div class="hero-container">
             <div class="hero-image">
                 <div class="profile-img-wrapper">
-                    <img src="https://i.ibb.co/m550vyc4/Abdullah.jpg" alt="Abdullah Alsaket">
+                    <!-- ✅ تم استبدال الصورة بالجديدة -->
+                    <img src="https://i.ibb.co/hRrQhKJx/DSC03255.jpg" alt="Abdullah Alsaket">
                 </div>
             </div>
             <div class="hero-text">
