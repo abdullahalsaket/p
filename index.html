@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abdullah Alsaket | Human Capital Consultant</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-bg: #0a0f1f;
+            --secondary-bg: #111827;
+            --tertiary-bg: #1a233b;
+            --accent-gold: #d4af37;
+            --text-white: #f3f4f6;
+            --text-muted: #9ca3af;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background-color: var(--primary-bg);
+            color: var(--text-white);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a { text-decoration: none; color: inherit; transition: all 0.3s ease; }
+
+        /* ====== Dynamic Backgrounds ====== */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -2;
+            background: linear-gradient(-45deg, #0a0f1f, #141b2d, #1f2a44, #0a0f1f);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .watermark {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            font-size: 8rem;
+            font-weight: 900;
+            color: rgba(255, 255, 255, 0.02);
+            white-space: nowrap;
+            pointer-events: none;
+            letter-spacing: 10px;
+            animation: rotateWatermark 60s linear infinite;
+        }
+
+        @keyframes rotateWatermark {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        .glow-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            z-index: -1;
+            opacity: 0.4;
+            animation: floatOrb 20s infinite alternate ease-in-out;
+        }
+
+        .glow-orb.one { width: 400px; height: 400px; background: rgba(212, 175, 55, 0.15); top: -100px; right: -100px; animation-duration: 25s; }
+        .glow-orb.two { width: 300px; height: 300px; background: rgba(59, 130, 246, 0.1); bottom: -50px; left: -50px; animation-duration: 30s; }
+
+        @keyframes floatOrb {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(100px, 100px) scale(1.2); }
+        }
+
+        /* ====== Navbar ====== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem 6%;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            background: rgba(10, 15, 31, 0.7);
+            backdrop-filter: blur(15px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            position: relative;
+            padding-bottom: 4px;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover { color: var(--text-white); }
+        .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+
+        /* ====== Sections Global ====== */
+        section {
+            padding: 100px 6%;
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+            opacity: 0;
+            transform: translateY(60px);
+            transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        section.visible { opacity: 1; transform: translateY(0); }
+
+        /* ====== Section Title with Animated Icon ====== */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 3rem;
+        }
+
+        .section-icon {
+            font-size: 2rem;
+            color: var(--accent-gold);
+            animation: floatIcon 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.2));
+        }
+
+        @keyframes floatIcon {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-6px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            color: var(--accent-gold);
+            position: relative;
+            display: inline-block;
+            font-weight: 600;
+            margin: 0;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--accent-gold);
+            border-radius: 2px;
+        }
+
+        .sub-section-title {
+            font-size: 1.6rem;
+            color: var(--text-white);
+            margin: 2rem 0 1.5rem 0;
+            font-weight: 600;
+        }
+
+        /* ====== HERO ====== */
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 80px;
+        }
+
+        .hero-container {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 1300px;
+            width: 100%;
+            gap: 4rem;
+        }
+
+        .hero-image {
+            flex: 1;
+            min-width: 300px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .profile-img-wrapper {
+            width: 380px;
+            height: 380px;
+            border-radius: 50%;
+            padding: 6px;
+            background: linear-gradient(160deg, var(--accent-gold), #f8e5a0);
+            box-shadow: 0 0 60px rgba(212, 175, 55, 0.3);
+            transition: transform 0.5s ease;
+        }
+
+        .profile-img-wrapper:hover { transform: scale(1.02); }
+
+        .profile-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--primary-bg);
+        }
+
+        .hero-text {
+            flex: 1.2;
+            min-width: 300px;
+        }
+
+        .hero-text .pre-title { color: var(--accent-gold); font-weight: 600; letter-spacing: 3px; text-transform: uppercase; font-size: 0.85rem; margin-bottom: 1.2rem; }
+        .hero-text h1 { font-size: 5rem; font-weight: 700; color: var(--text-white); line-height: 1.1; margin-bottom: 1rem; letter-spacing: -1px; }
+        .hero-text .subtitle { font-size: 1.25rem; color: var(--text-muted); margin-bottom: 2rem; font-weight: 300; max-width: 500px; line-height: 1.6; }
+        .hero-text .tagline { font-size: 1.1rem; font-weight: 400; color: var(--text-white); margin-bottom: 2.5rem; opacity: 0.9; border-left: 3px solid var(--accent-gold); padding-left: 20px; }
+
+        .hero-buttons { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+        .btn { padding: 16px 40px; border-radius: 6px; font-weight: 600; cursor: pointer; display: inline-block; font-size: 1rem; transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+        .btn-gold { background: var(--accent-gold); color: var(--primary-bg); box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3); }
+        .btn-gold:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(212, 175, 55, 0.4); }
+        .btn-outline { background: transparent; border: 1px solid rgba(255, 255, 255, 0.2); color: var(--text-white); }
+        .btn-outline:hover { border-color: var(--accent-gold); color: var(--accent-gold); transform: translateY(-3px); }
+
+        /* ====== About Bio & Core Expertise ====== */
+        .about-section { background: rgba(17, 24, 39, 0.5); backdrop-filter: blur(4px); border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05); }
+        
+        .bio-container { max-width: 100%; margin-bottom: 3rem; }
+        .bio-container h2 { font-size: 2.5rem; color: var(--text-white); margin-bottom: 1.5rem; font-weight: 700; line-height: 1.2; }
+        .bio-container h2 span { color: var(--accent-gold); }
+        .bio-container p { color: var(--text-muted); font-size: 1.1rem; line-height: 1.8; max-width: 100%; }
+        
+        .expertise-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; margin-top: 1.5rem; }
+        .expertise-item { background: rgba(255, 255, 255, 0.03); padding: 1.2rem; border-radius: 8px; border-left: 3px solid var(--accent-gold); transition: all 0.3s ease; }
+        .expertise-item:hover { transform: translateX(5px); background: rgba(255, 255, 255, 0.06); }
+        .expertise-item p { color: var(--text-muted); font-size: 0.95rem; margin: 0; }
+
+        /* ====== Services Grid ====== */
+        .services-section { background: rgba(10, 15, 31, 0.3); backdrop-filter: blur(4px); }
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-top: 1rem; }
+        
+        .service-category {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 2.5rem 2rem;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-category::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-gold), #f8e5a0);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .service-category:hover {
+            transform: translateY(-12px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(212, 175, 55, 0.3);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+
+        .service-category:hover::before { transform: scaleX(1); }
+
+        .service-category i { font-size: 2.8rem; color: var(--accent-gold); margin-bottom: 1.2rem; display: block; }
+        .service-category h3 { color: var(--text-white); font-weight: 700; font-size: 1.3rem; margin-bottom: 1.2rem; }
+        .service-list { list-style: none; padding: 0; margin: 0; }
+        .service-list li { color: var(--text-muted); font-size: 0.95rem; line-height: 1.8; padding: 0.3rem 0; position: relative; padding-left: 1.5rem; }
+        .service-list li::before { content: "◆"; color: var(--accent-gold); position: absolute; left: 0; top: 0.3rem; font-size: 0.7rem; }
+
+        /* ====== Experience Detailed ====== */
+        .experience-section { background: rgba(17, 24, 39, 0.4); backdrop-filter: blur(4px); }
+        .timeline { position: relative; max-width: 900px; margin: 0 auto; padding-left: 30px; border-left: 1px solid rgba(212, 175, 55, 0.2); }
+        .timeline-item { position: relative; margin-bottom: 3.5rem; padding-left: 30px; }
+        .timeline-item::before { content: ''; position: absolute; left: -35px; top: 8px; width: 10px; height: 10px; border-radius: 50%; background: var(--accent-gold); box-shadow: 0 0 15px rgba(212, 175, 55, 0.4); }
+        .timeline-item .role-head { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; }
+        .timeline-item h3 { font-size: 1.4rem; font-weight: 600; color: var(--text-white); }
+        .timeline-item .company { color: var(--accent-gold); display: block; margin: 0.2rem 0; font-weight: 500; }
+        .timeline-item .date { color: var(--text-muted); font-size: 0.85rem; display: block; margin-bottom: 0.8rem; }
+        .timeline-item ul { color: var(--text-muted); line-height: 1.8; font-size: 0.95rem; padding-left: 1.2rem; max-width: 700px; margin-top: 0.5rem; }
+        .timeline-item ul li { margin-bottom: 0.5rem; }
+        .timeline-item .highlight { color: var(--accent-gold); font-weight: 600; }
+
+        /* ====== Signature Projects ====== */
+        .projects-section { background: rgba(10, 15, 31, 0.3); backdrop-filter: blur(4px); }
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; margin-top: 1rem; }
+        
+        .project-card {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 2.5rem 2rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--accent-gold);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .project-card:hover { transform: translateY(-10px); background: rgba(255, 255, 255, 0.08); border-color: rgba(212, 175, 55, 0.2); box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+        .project-card:hover::before { opacity: 1; }
+        
+        .project-card i { font-size: 2rem; color: var(--accent-gold); margin-bottom: 1.2rem; }
+        .project-card h3 { color: var(--text-white); font-weight: 600; font-size: 1.2rem; }
+        .project-card .client { color: var(--accent-gold); font-size: 0.9rem; display: block; margin: 0.2rem 0 0.8rem; }
+        .project-card ul { color: var(--text-muted); line-height: 1.6; font-size: 0.95rem; padding-left: 1.2rem; }
+        .project-card ul li { margin-bottom: 0.4rem; }
+        .project-card .highlight { color: var(--accent-gold); font-weight: 600; }
+
+        /* ====== E-Learning Platforms ====== */
+        .platforms-section { background: rgba(17, 24, 39, 0.4); backdrop-filter: blur(4px); }
+        .platforms-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 1rem; }
+        .platform-card { background: rgba(255, 255, 255, 0.03); padding: 2rem; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.05); text-align: center; transition: all 0.3s ease; }
+        .platform-card:hover { transform: translateY(-5px); border-color: var(--accent-gold); background: rgba(255, 255, 255, 0.06); }
+        .platform-card i { font-size: 2.5rem; color: var(--accent-gold); margin-bottom: 1rem; }
+        .platform-card h4 { color: var(--text-white); font-weight: 600; margin-bottom: 0.3rem; }
+        .platform-card .role { color: var(--accent-gold); font-size: 0.85rem; display: block; margin-bottom: 0.8rem; }
+        .platform-card ul { color: var(--text-muted); line-height: 1.6; font-size: 0.9rem; padding-left: 1.2rem; text-align: left; }
+        .platform-card ul li { margin-bottom: 0.3rem; }
+
+        /* ====== Philosophy ====== */
+        .philosophy-section { background: rgba(10, 15, 31, 0.3); backdrop-filter: blur(4px); }
+        .philosophy-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 2rem; }
+        .philosophy-card { background: rgba(255, 255, 255, 0.03); padding: 2rem; border-radius: 12px; border: 1px solid rgba(255, 255, 255, 0.05); transition: all 0.4s ease; }
+        .philosophy-card:hover { transform: translateY(-5px); border-color: rgba(212, 175, 55, 0.3); }
+        .philosophy-card i { font-size: 2rem; color: var(--accent-gold); margin-bottom: 1rem; }
+        .philosophy-card h4 { color: var(--text-white); font-weight: 600; margin-bottom: 0.5rem; }
+        .philosophy-card p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; }
+
+        /* ====== Certifications ====== */
+        .cert-section { background: rgba(17, 24, 39, 0.4); backdrop-filter: blur(4px); }
+        .cert-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; }
+        .cert-item { background: rgba(255, 255, 255, 0.03); padding: 1.5rem; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.05); display: flex; flex-direction: column; transition: all 0.3s ease; }
+        .cert-item:hover { border-color: var(--accent-gold); transform: translateY(-3px); }
+        .cert-item strong { color: var(--text-white); font-weight: 600; display: block; margin-bottom: 0.3rem; }
+        .cert-item .issuer { color: var(--accent-gold); font-size: 0.85rem; margin-top: 0.3rem; display: block; }
+
+        /* ====== Contact with New Social Icons ====== */
+        .contact-section { background: rgba(10, 15, 31, 0.5); backdrop-filter: blur(4px); text-align: center; min-height: 70vh; border-top: 1px solid rgba(255,255,255,0.05); }
+        .contact-container { max-width: 700px; margin: 0 auto; }
+        .cta-text { font-size: 1.2rem; color: var(--text-muted); margin-bottom: 3.5rem; line-height: 1.8; }
+        .social-links { display: flex; justify-content: center; gap: 1.2rem; margin-bottom: 2.5rem; flex-wrap: wrap; }
+        .social-btn { width: 55px; height: 55px; background: rgba(255, 255, 255, 0.05); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; color: var(--text-muted); border: 1px solid rgba(255, 255, 255, 0.08); transition: all 0.3s ease; }
+        .social-btn:hover { color: var(--accent-gold); transform: translateY(-6px); border-color: var(--accent-gold); background: rgba(212, 175, 55, 0.1); }
+        .btn-whatsapp { background: #25D366; color: #fff; padding: 16px 40px; border-radius: 6px; font-weight: 600; font-size: 1.1rem; display: inline-flex; align-items: center; gap: 12px; box-shadow: 0 4px 20px rgba(37, 211, 102, 0.2); transition: all 0.3s ease; }
+        .btn-whatsapp:hover { transform: translateY(-4px); box-shadow: 0 10px 30px rgba(37, 211, 102, 0.3); background: #20bd5a; }
+
+        @media (max-width: 768px) {
+            .hero-text h1 { font-size: 3.5rem; }
+            .hero-container { flex-direction: column-reverse; text-align: center; }
+            .hero-text .subtitle { max-width: 100%; margin: 0 auto 2rem; }
+            .hero-text .tagline { border-left: none; border-bottom: 3px solid var(--accent-gold); padding: 0 0 15px 0; margin-bottom: 2rem; display: inline-block; }
+            .hero-buttons { justify-content: center; }
+            .profile-img-wrapper { width: 280px; height: 280px; }
+            .nav-links { display: none; }
+            .watermark { font-size: 4rem; }
+            .social-links { gap: 0.8rem; }
+            .social-btn { width: 45px; height: 45px; font-size: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Backgrounds -->
+    <div class="animated-bg"></div>
+    <div class="watermark">Abdullah Alsaket</div>
+    <div class="glow-orb one"></div>
+    <div class="glow-orb two"></div>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Connect</a></li>
+        </ul>
+    </nav>
+
+    <!-- ====== HERO ====== -->
+    <section id="home" class="hero-section">
+        <div class="hero-container">
+            <div class="hero-image">
+                <div class="profile-img-wrapper">
+                    <img src="https://i.ibb.co/m550vyc4/Abdullah.jpg" alt="Abdullah Alsaket">
+                </div>
+            </div>
+            <div class="hero-text">
+                <div class="pre-title">Human Capital Architect</div>
+                <h1>Abdullah Alsaket</h1>
+                <div class="subtitle">Consultant | Learning Designer | HR Business Partner</div>
+                <div class="tagline">"Turning human potential into practical, measurable business capability."</div>
+                <div class="hero-buttons">
+                    <a href="#about" class="btn btn-gold">Discover More</a>
+                    <a href="#contact" class="btn btn-outline">Work With Me</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== ABOUT & EXPERTISE ====== -->
+    <section id="about" class="about-section">
+        <div>
+            <div class="bio-container">
+                <h2>Building Human Potential<br><span>Through Learning, Development & Organizational Growth</span></h2>
+                <p>
+                    Somewhere between education and the real market, a lot of talent gets lost. My work has always been focused on closing that gap through impactful learning experiences, strategic development initiatives, and human-centered growth.<br><br>
+                    With more than 14 years of professional experience across Human Capital Development, Learning Experience Design, Talent Management, Organizational Development, and Workforce Enablement, I help organizations and individuals transform learning into measurable business impact.<br><br>
+                    My work combines strategic thinking, instructional design expertise, business understanding, and practical workforce development approaches to create learning ecosystems that empower people, improve performance, and support sustainable organizational growth.
+                </p>
+            </div>
+
+            <h3 class="sub-section-title" style="color: var(--accent-gold); border-left: 3px solid var(--accent-gold); padding-left: 15px;">Core Areas of Expertise</h3>
+            <div class="expertise-grid">
+                <div class="expertise-item"><p>Human Capital Development</p></div>
+                <div class="expertise-item"><p>Learning Experience Design (LXD)</p></div>
+                <div class="expertise-item"><p>Instructional Design & Training Development</p></div>
+                <div class="expertise-item"><p>Talent Management & Capability Development</p></div>
+                <div class="expertise-item"><p>Organizational Development (OD)</p></div>
+                <div class="expertise-item"><p>Workforce Development & Employability</p></div>
+                <div class="expertise-item"><p>Performance Management Systems</p></div>
+                <div class="expertise-item"><p>Career Readiness & Freelancing Skills</p></div>
+                <div class="expertise-item"><p>Leadership Development</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== SERVICES ====== -->
+    <section id="services" class="services-section">
+        <div>
+            <div class="section-header">
+                <i class="fa-solid fa-handshake section-icon"></i>
+                <h2 class="section-title">How Can I Support You?</h2>
+            </div>
+            <div class="services-grid">
+                <div class="service-category">
+                    <i class="fa-solid fa-users-gear"></i>
+                    <h3>Human Capital & Organizational Development</h3>
+                    <ul class="service-list">
+                        <li>Organizational Development Consultation</li>
+                        <li>Talent Management Systems</li>
+                        <li>Workforce Planning Support</li>
+                        <li>Performance Management Systems</li>
+                        <li>KPI Framework Design</li>
+                        <li>Employee Engagement Initiatives</li>
+                    </ul>
+                </div>
+                <div class="service-category">
+                    <i class="fa-solid fa-pen-ruler"></i>
+                    <h3>Learning Experience Design</h3>
+                    <ul class="service-list">
+                        <li>Instructional Design</li>
+                        <li>Learning Journey Development</li>
+                        <li>Competency-Based Program Design</li>
+                        <li>Facilitator Guides & Training Manuals</li>
+                        <li>E-Learning Development</li>
+                        <li>LMS Learning Content</li>
+                    </ul>
+                </div>
+                <div class="service-category">
+                    <i class="fa-solid fa-chalkboard-user"></i>
+                    <h3>Training & Facilitation</h3>
+                    <ul class="service-list">
+                        <li>Leadership Development</li>
+                        <li>Employability & Career Readiness</li>
+                        <li>Freelancing Skills Development</li>
+                        <li>Soft Skills Training</li>
+                        <li>HR Professional Development</li>
+                        <li>Tourism & Hospitality Development</li>
+                    </ul>
+                </div>
+                <div class="service-category">
+                    <i class="fa-solid fa-chart-pie"></i>
+                    <h3>Monitoring, Evaluation & Impact</h3>
+                    <ul class="service-list">
+                        <li>Monitoring & Evaluation Systems</li>
+                        <li>Learning Impact Measurement</li>
+                        <li>Training Effectiveness Analysis</li>
+                        <li>Performance Analytics</li>
+                        <li>Reporting & Assessment Frameworks</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== EXPERIENCE DETAILS ====== -->
+    <section id="experience" class="experience-section">
+        <div>
+            <div class="section-header">
+                <i class="fa-solid fa-briefcase section-icon"></i>
+                <h2 class="section-title">Professional Experience</h2>
+            </div>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="role-head">
+                        <h3>HR Business Partner</h3>
+                        <span class="date">June 2024 – Present</span>
+                    </div>
+                    <span class="company">Americana Foods | Cairo, Egypt</span>
+                    <ul>
+                        <li><span class="highlight">Key Contributions:</span> Partnering with business leaders to identify capability gaps and implement targeted learning interventions aligned with operational and business goals.</li>
+                        <li>Supporting workforce planning, recruitment operations, and organizational alignment across multiple departments.</li>
+                        <li>Contributing to organizational effectiveness through HR process optimization, KPI frameworks, and employee engagement initiatives.</li>
+                        <li>Supporting performance management cycles including KPI setting, appraisal systems, and performance tracking.</li>
+                        <li>Enhancing learning culture through continuous development initiatives and strategic L&D support.</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="role-head">
+                        <h3>Training & Talent Management Section Head</h3>
+                        <span class="date">July 2022 – June 2024</span>
+                    </div>
+                    <span class="company">BEAM Consolidated | Cairo, Egypt</span>
+                    <ul>
+                        <li><span class="highlight">Key Achievements:</span> Led Training & Talent Management operations for <span class="highlight">1,100+ employees</span> across 8 business units.</li>
+                        <li>Conducted enterprise-wide Training Needs Analysis (TNA), improving employee competency performance by <span class="highlight">40%</span>.</li>
+                        <li>Designed and managed 3 long-term core programs and <span class="highlight">12+</span> annual training initiatives.</li>
+                        <li>Implemented KPI-driven performance evaluation systems to measure workforce productivity and learning effectiveness.</li>
+                        <li>Reduced operational training costs through optimized in-house learning solutions.</li>
+                        <li>Improved employee engagement and retention through targeted development programs.</li>
+                        <li>Managed workforce analytics including turnover, manpower planning, and incentive alignment.</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="role-head">
+                        <h3>Learning & Capability Development Professional</h3>
+                        <span class="date">January 2022 – July 2022</span>
+                    </div>
+                    <span class="company">FAWRY | Cairo, Egypt</span>
+                    <ul>
+                        <li><span class="highlight">Key Achievements:</span> Designed onboarding and employee development programs that improved new hire productivity by <span class="highlight">20%</span>.</li>
+                        <li>Collaborated with department heads to identify capability gaps and implement targeted development initiatives.</li>
+                        <li>Managed leadership development and career growth projects, increasing leadership readiness among managers.</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="role-head">
+                        <h3>Area Training Manager</h3>
+                        <span class="date">September 2020 – January 2022</span>
+                    </div>
+                    <span class="company">OPPO | Cairo, Egypt</span>
+                    <ul>
+                        <li><span class="highlight">Key Achievements:</span> Managed regional training programs that improved employee performance by <span class="highlight">20%</span>.</li>
+                        <li>Developed onboarding systems improving employee integration by <span class="highlight">30%</span>.</li>
+                        <li>Facilitated leadership development workshops and engagement initiatives that increased retention by <span class="highlight">15%</span>.</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="role-head">
+                        <h3>Monitoring, Evaluation and Learning Executive</h3>
+                        <span class="date">May 2015 – September 2020</span>
+                    </div>
+                    <span class="company">Tourism and Hospitality Management Center | Egypt</span>
+                    <ul>
+                        <li><span class="highlight">Key Achievements:</span> Led Monitoring, Evaluation & Learning (MEL) systems implementation.</li>
+                        <li>Designed unified frameworks and measurable KPIs for project tracking and sustainability.</li>
+                        <li>Conducted impact assessments, baseline studies, and organizational learning initiatives.</li>
+                        <li>Managed coaching, mentoring, and performance support for teams.</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="role-head">
+                        <h3>Domestic Tourism & Tourism Training Manager</h3>
+                        <span class="date">November 2012 – February 2015</span>
+                    </div>
+                    <span class="company">Upper Moon | Egypt</span>
+                    <ul>
+                        <li><span class="highlight">Key Achievements:</span> Increased tourism program bookings by <span class="highlight">30%</span>.</li>
+                        <li>Improved customer satisfaction by <span class="highlight">35%</span>.</li>
+                        <li>Designed and delivered tourism operations and customer service training programs.</li>
+                        <li>Achieved over <span class="highlight">90%</span> trainee satisfaction scores.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== SIGNATURE PROJECTS ====== -->
+    <section id="projects" class="projects-section">
+        <div>
+            <div class="section-header">
+                <i class="fa-solid fa-rocket section-icon"></i>
+                <h2 class="section-title">Signature Projects & Strategic Initiatives</h2>
+            </div>
+            <div class="projects-grid">
+                
+                <div class="project-card">
+                    <i class="fa-solid fa-briefcase"></i>
+                    <h3>Nomu Al Ghurair Job Readiness Program</h3>
+                    <span class="client">Al Ghurair Foundation × Nafis UAE</span>
+                    <ul>
+                        <li>Designed the full Tourism & Hospitality track curriculum for Emirati youth.</li>
+                        <li>Trained <span class="highlight">120+</span> participants aligned with UAE labor market requirements.</li>
+                        <li>Improved job readiness assessment scores by <span class="highlight">35%</span>.</li>
+                        <li>Achieved <span class="highlight">94%</span> participant satisfaction across program cohorts.</li>
+                        <li>Applied experiential learning methodologies and real-world simulations.</li>
+                    </ul>
+                </div>
+
+                <div class="project-card">
+                    <i class="fa-solid fa-laptop-code"></i>
+                    <h3>Digital Egypt Pioneers Initiative (DEPI)</h3>
+                    <span class="client">Ministry of Communications | Egypt</span>
+                    <ul>
+                        <li>Delivered career readiness and freelancing skills programs for students and graduates.</li>
+                        <li>Designed employability-focused learning modules aligned with Egypt’s digital economy.</li>
+                        <li>Supported learners in building practical career and freelancing capabilities.</li>
+                    </ul>
+                </div>
+
+                <div class="project-card">
+                    <i class="fa-solid fa-chart-simple"></i>
+                    <h3>TEVET Project</h3>
+                    <span class="client">Tourism & Hospitality Management Center</span>
+                    <ul>
+                        <li>Developed unified MEL frameworks and performance indicators.</li>
+                        <li>Conducted impact assessments and sustainability evaluations.</li>
+                        <li>Managed capacity building and performance support initiatives.</li>
+                    </ul>
+                </div>
+
+                <div class="project-card">
+                    <i class="fa-solid fa-building"></i>
+                    <h3>Egyptian Postal Authority Development Project</h3>
+                    <span class="client">Arab Academy for Science, Technology & Maritime Transport</span>
+                    <ul>
+                        <li>Delivered specialized employee development programs.</li>
+                        <li>Designed practical training content aligned with operational requirements.</li>
+                        <li>Supported employee capability development and career progression.</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== E-LEARNING PLATFORMS ====== -->
+    <section class="platforms-section">
+        <div>
+            <div class="section-header">
+                <i class="fa-solid fa-laptop section-icon"></i>
+                <h2 class="section-title">E-Learning & Digital Contributions</h2>
+            </div>
+            <div class="platforms-grid">
+                
+                <div class="platform-card">
+                    <i class="fa-solid fa-globe"></i>
+                    <h4>Courssat.com</h4>
+                    <span class="role">Instructor & Instructional Designer</span>
+                    <ul>
+                        <li>Designed and delivered 4 complete recorded HR and Human Capital programs.</li>
+                        <li>Developed engaging instructional content based on modern adult learning methodologies.</li>
+                        <li>Applied competency-based learning and interactive engagement techniques.</li>
+                    </ul>
+                </div>
+
+                <div class="platform-card">
+                    <i class="fa-solid fa-building-columns"></i>
+                    <h4>IGTS for Business</h4>
+                    <span class="role">HR Professional Certification Trainer</span>
+                    <ul>
+                        <li>Delivered HR Professional Certification diploma programs.</li>
+                        <li>Developed practical instructional content in Talent Management and Performance Management.</li>
+                    </ul>
+                </div>
+
+                <div class="platform-card">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                    <h4>EYouth Learning</h4>
+                    <span class="role">Career Readiness Instructor</span>
+                    <ul>
+                        <li>Delivered Job Market Preparation and Tourism Career Readiness courses.</li>
+                        <li>Participated in Digital Egypt Pioneers Initiative training programs.</li>
+                    </ul>
+                </div>
+
+                <div class="platform-card">
+                    <i class="fa-solid fa-certificate"></i>
+                    <h4>Coursera</h4>
+                    <span class="role">Course Instructor</span>
+                    <ul>
+                        <li>Delivered a course on Personal Branding and Portfolio Design using PowerPoint.</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== KEY CERTIFICATIONS & EDUCATION ====== -->
+    <section class="cert-section">
+        <div>
+            <div class="section-header">
+                <i class="fa-solid fa-certificate section-icon"></i>
+                <h2 class="section-title">Key Certifications & Education</h2>
+            </div>
+            
+            <h3 class="sub-section-title" style="font-size: 1.2rem; color: var(--accent-gold);">Certifications</h3>
+            <div class="cert-grid" style="margin-bottom: 3rem;">
+                <div class="cert-item"><strong>Mastering the Skill Assessment</strong><span class="issuer">HPA Academy</span></div>
+                <div class="cert-item"><strong>Instructional Design</strong><span class="issuer">Information Technology Institute (ITI)</span></div>
+                <div class="cert-item"><strong>Articulate Storyline 3</strong><span class="issuer">Information Technology Institute (ITI)</span></div>
+                <div class="cert-item"><strong>Organizational Structure & Job Description</strong><span class="issuer">E3melbusiness Academy</span></div>
+                <div class="cert-item"><strong>Performance Management Systems</strong><span class="issuer">E3melbusiness Academy</span></div>
+            </div>
+
+            <h3 class="sub-section-title" style="font-size: 1.2rem; color: var(--accent-gold);">Education</h3>
+            <div class="cert-grid">
+                <div class="cert-item"><strong>Master of Business Administration (MBA)</strong><span class="issuer">American Entrepreneurship & Business University</span></div>
+                <div class="cert-item"><strong>Bachelor of Arts – History Department</strong><span class="issuer">Cairo University</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== CONTACT WITH NEW ICONS ====== -->
+    <section id="contact" class="contact-section">
+        <div class="contact-container">
+            <div class="section-header" style="justify-content: center;">
+                <i class="fa-solid fa-envelope section-icon"></i>
+                <h2 class="section-title" style="text-align: center; display: inline-block;">Let's Build Impact</h2>
+            </div>
+            
+            <p class="cta-text">
+                Ready to transform potential into measurable business growth?<br>
+                I turn strategies into execution, and learning into performance.
+            </p>
+            
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/abdullahalsaket/" target="_blank" class="social-btn"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="https://www.facebook.com/abdullah.elsaket" target="_blank" class="social-btn"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/abdullah.alsaket" target="_blank" class="social-btn"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://www.tiktok.com/@abdullah.alsaket" target="_blank" class="social-btn"><i class="fa-brands fa-tiktok"></i></a>
+                <a href="https://www.youtube.com/@abdullahalsaket" target="_blank" class="social-btn"><i class="fa-brands fa-youtube"></i></a>
+                <a href="mailto:abdullahalsaket@outlook.com" class="social-btn"><i class="fa-solid fa-envelope"></i></a>
+            </div>
+
+            <div class="whatsapp-btn-wrapper">
+                <a href="https://wa.me/201068238088" target="_blank" class="btn-whatsapp">
+                    <i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <script>
+        const sections = document.querySelectorAll('section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) { entry.target.classList.add('visible'); }
+            });
+        }, { threshold: 0.1 });
+        sections.forEach(section => { observer.observe(section); });
+    </script>
+</body>
+</html>
