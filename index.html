@@ -324,6 +324,56 @@
         .service-list li { color: var(--text-muted); font-size: 0.95rem; line-height: 1.8; padding: 0.3rem 0; position: relative; padding-left: 1.5rem; }
         .service-list li::before { content: "◆"; color: var(--accent-gold); position: absolute; left: 0; top: 0.3rem; font-size: 0.7rem; }
 
+        /* ====== IMPACT STATS (New Section) ====== */
+        .stats-section {
+            background: rgba(17, 24, 39, 0.5);
+            backdrop-filter: blur(4px);
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+        .stat-card {
+            background: rgba(255, 255, 255, 0.03);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s ease;
+        }
+        .stat-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent-gold);
+            background: rgba(255, 255, 255, 0.06);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.1);
+        }
+        .stat-card i {
+            font-size: 2.5rem;
+            color: var(--accent-gold);
+            margin-bottom: 1rem;
+            display: block;
+        }
+        .stat-card .number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--text-white);
+        }
+        .stat-card .label {
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin-top: 0.5rem;
+        }
+        .stat-card .sub {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-top: 0.2rem;
+            opacity: 0.7;
+        }
+
         /* ====== Experience Detailed ====== */
         .experience-section { background: rgba(17, 24, 39, 0.4); backdrop-filter: blur(4px); }
         .timeline { position: relative; max-width: 900px; margin: 0 auto; padding-left: 30px; border-left: 1px solid rgba(212, 175, 55, 0.2); }
@@ -439,6 +489,7 @@
             <li><a href="#home">Home</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#services">Services</a></li>
+            <li><a href="#stats">Impact</a></li>
             <li><a href="#experience">Experience</a></li>
             <li><a href="#projects">Projects</a></li>
             <li><a href="#contact">Connect</a></li>
@@ -450,7 +501,6 @@
         <div class="hero-container">
             <div class="hero-image">
                 <div class="profile-img-wrapper">
-                    <!-- ✅ تم استخدام الاسم المحلي للصورة مباشرة -->
                     <img src="71609_1728588.jpg" alt="Abdullah Alsaket">
                 </div>
             </div>
@@ -548,6 +598,42 @@
                         <li>Performance Analytics</li>
                         <li>Reporting & Assessment Frameworks</li>
                     </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ====== IMPACT STATS SECTION ====== -->
+    <section id="stats" class="stats-section">
+        <div>
+            <div class="section-header" style="justify-content: center;">
+                <i class="fa-solid fa-chart-line section-icon"></i>
+                <h2 class="section-title" style="text-align: center;">Impact at a Glance</h2>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <i class="fa-solid fa-users"></i>
+                    <div class="number">3,000+</div>
+                    <div class="label">Trained & Empowered</div>
+                    <div class="sub">Across 3 Countries</div>
+                </div>
+                <div class="stat-card">
+                    <i class="fa-solid fa-user-check"></i>
+                    <div class="number">85+</div>
+                    <div class="label">Individual Clients</div>
+                    <div class="sub">Trusted Our Services</div>
+                </div>
+                <div class="stat-card">
+                    <i class="fa-solid fa-laptop"></i>
+                    <div class="number">5+</div>
+                    <div class="label">E-Learning Platforms</div>
+                    <div class="sub">Featured & Contributed To</div>
+                </div>
+                <div class="stat-card">
+                    <i class="fa-solid fa-clock"></i>
+                    <div class="number">14+</div>
+                    <div class="label">Years of Experience</div>
+                    <div class="sub">Across 4 Industries</div>
                 </div>
             </div>
         </div>
