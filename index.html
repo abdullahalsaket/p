@@ -325,6 +325,36 @@
         .service-list li { color: var(--text-muted); font-size: 0.95rem; line-height: 1.8; padding: 0.3rem 0; position: relative; padding-left: 1.5rem; }
         .service-list li::before { content: "◆"; color: var(--accent-gold); position: absolute; left: 0; top: 0.3rem; font-size: 0.7rem; }
 
+        /* ---------- Service CTA Button ---------- */
+        .service-btn-wrapper {
+            margin-top: 1.5rem;
+        }
+        .btn-service-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: transparent;
+            color: var(--accent-gold);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            padding: 10px 24px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .btn-service-cta i {
+            font-size: 1rem;
+            margin-bottom: 0;
+        }
+        .btn-service-cta:hover {
+            background: var(--accent-gold);
+            color: var(--primary-bg);
+            border-color: var(--accent-gold);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+        }
+
         /* ====== IMPACT STATS ====== */
         .stats-section {
             background: rgba(17, 24, 39, 0.5);
@@ -611,6 +641,8 @@
                 <h2 class="section-title">How Can I Support You?</h2>
             </div>
             <div class="services-grid">
+                
+                <!-- Service 1: Human Capital -->
                 <div class="service-category">
                     <i class="fa-solid fa-users-gear"></i>
                     <h3>Human Capital & Organizational Development</h3>
@@ -622,7 +654,14 @@
                         <li>KPI Framework Design</li>
                         <li>Employee Engagement Initiatives</li>
                     </ul>
+                    <div class="service-btn-wrapper">
+                        <a href="https://wa.me/201068238088?text=Hi%20Abdullah%2C%20I'm%20interested%20in%20your%20Human%20Capital%20%26%20Organizational%20Development%20services.%20Can%20you%20share%20more%20details%3F" target="_blank" class="btn-service-cta">
+                            <i class="fa-brands fa-whatsapp"></i> Know More
+                        </a>
+                    </div>
                 </div>
+
+                <!-- Service 2: Learning Experience Design -->
                 <div class="service-category">
                     <i class="fa-solid fa-pen-ruler"></i>
                     <h3>Learning Experience Design</h3>
@@ -634,7 +673,14 @@
                         <li>E-Learning Development</li>
                         <li>LMS Learning Content</li>
                     </ul>
+                    <div class="service-btn-wrapper">
+                        <a href="https://wa.me/201068238088?text=Hi%20Abdullah%2C%20I'm%20interested%20in%20your%20Learning%20Experience%20Design%20services.%20Can%20you%20share%20more%20details%3F" target="_blank" class="btn-service-cta">
+                            <i class="fa-brands fa-whatsapp"></i> Know More
+                        </a>
+                    </div>
                 </div>
+
+                <!-- Service 3: Training & Facilitation -->
                 <div class="service-category">
                     <i class="fa-solid fa-chalkboard-user"></i>
                     <h3>Training & Facilitation</h3>
@@ -646,7 +692,14 @@
                         <li>HR Professional Development</li>
                         <li>Tourism & Hospitality Development</li>
                     </ul>
+                    <div class="service-btn-wrapper">
+                        <a href="https://wa.me/201068238088?text=Hi%20Abdullah%2C%20I'm%20interested%20in%20your%20Training%20%26%20Facilitation%20services.%20Can%20you%20share%20more%20details%3F" target="_blank" class="btn-service-cta">
+                            <i class="fa-brands fa-whatsapp"></i> Know More
+                        </a>
+                    </div>
                 </div>
+
+                <!-- Service 4: Monitoring & Evaluation -->
                 <div class="service-category">
                     <i class="fa-solid fa-chart-pie"></i>
                     <h3>Monitoring, Evaluation & Impact</h3>
@@ -657,8 +710,14 @@
                         <li>Performance Analytics</li>
                         <li>Reporting & Assessment Frameworks</li>
                     </ul>
+                    <div class="service-btn-wrapper">
+                        <a href="https://wa.me/201068238088?text=Hi%20Abdullah%2C%20I'm%20interested%20in%20your%20Monitoring%2C%20Evaluation%20%26%20Impact%20services.%20Can%20you%20share%20more%20details%3F" target="_blank" class="btn-service-cta">
+                            <i class="fa-brands fa-whatsapp"></i> Know More
+                        </a>
+                    </div>
                 </div>
-                <!-- === NEW SERVICE === -->
+
+                <!-- Service 5: Career Mentorship -->
                 <div class="service-category">
                     <i class="fa-solid fa-compass"></i>
                     <h3>Career Mentorship & Job Readiness</h3>
@@ -670,7 +729,13 @@
                         <li>Employability Skills Training</li>
                         <li>Freelancing & Entrepreneurship Guidance</li>
                     </ul>
+                    <div class="service-btn-wrapper">
+                        <a href="https://wa.me/201068238088?text=Hi%20Abdullah%2C%20I'm%20interested%20in%20your%20Career%20Mentorship%20%26%20Job%20Readiness%20services.%20Can%20you%20share%20more%20details%3F" target="_blank" class="btn-service-cta">
+                            <i class="fa-brands fa-whatsapp"></i> Know More
+                        </a>
+                    </div>
                 </div>
+
             </div>
         </div>
     </section>
@@ -707,7 +772,6 @@
                     <div class="label">Years of Experience</div>
                     <div class="sub">Across 4 Industries</div>
                 </div>
-                <!-- === NEW STAT === -->
                 <div class="stat-card">
                     <i class="fa-solid fa-people-arrows"></i>
                     <div class="number">200+</div>
@@ -983,7 +1047,6 @@
             <h2>Ready to <span>transform your workforce?</span></h2>
             <p>Let’s have a conversation about how we can design a learning & development strategy that actually delivers results for your organization.</p>
             
-            <!-- WhatsApp Book Now Button -->
             <a href="https://wa.me/201068238088?text=Hi%20Abdullah%2C%20I%20saw%20your%20portfolio%20and%20I'm%20interested%20in%20booking%20a%20consultation%20to%20discuss%20how%20we%20can%20work%20together." target="_blank" class="btn-cta-whatsapp">
                 <i class="fa-brands fa-whatsapp"></i> Book a Free Consultation
             </a>
